@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BurgerMenu } from './BurgerMenu';
+import  {ButtonIndigo} from './ButtonIndigo';
 
 const Header = () => {
   return (
@@ -23,9 +24,7 @@ const Header = () => {
         </div>
 
         <div className="hidden md:block">
-          <button className="text-white transition-colors hover:bg-indigo-500 duration-500 text-lg px-4 py-2 rounded-full border-solid border border-gray-400">
-            Sign In
-          </button>
+          <ButtonIndigo buttonText='Sign In'/>
         </div>
       </div>
     </header>
