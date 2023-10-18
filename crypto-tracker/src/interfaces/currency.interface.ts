@@ -28,5 +28,5 @@ export interface ICurrency  {
 }
 
 export interface ICurrencyData {
-    currency: ICurrency[]
+    currencies: ICurrency[]
 }
