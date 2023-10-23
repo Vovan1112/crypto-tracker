@@ -8,9 +8,9 @@ export default async function SectionWithTable() {
     const currencies = await getAllCurrencies.getAll();
 
         return (
-            <div className="flex flex-col">
+            <div className="flex flex-col overflow-auto">
             <div className="inline-block min-w-full mx-auto">
-              <div className="overflow-hidden">
+              <div>
                 <table className="min-w-full text-center text-sm font-light">
                   <thead
                     className="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
