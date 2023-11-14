@@ -1,7 +1,8 @@
 import type { AuthOptions, User } from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
-import Credentials from 'next-auth/providers/credentials'
-import { users } from "@/data/users";
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/app/firebase";
 
 export const authConfig: AuthOptions = {
     providers: [
@@ -9,25 +10,25 @@ export const authConfig: AuthOptions = {
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_SECRET!,
         }),
-        Credentials({
-            credentials: {
-                email: {label: 'email', type: 'email', required: true},
-                password: {label: 'password', type: 'password', required: true},
-            },
-            async authorize (credentials) {
-                if(!credentials?.email || !credentials.password) return null;
-
-                const currentUser = users.find(user => user.email === credentials.email)
-
-                if(currentUser && currentUser.password === credentials.password) {
-                    const {password, ...userWithOutPass} = currentUser;
-
-                    return userWithOutPass as User
-                }
-
-                return null;
+        CredentialsProvider({
+            name: 'Credentials',
+            credentials: {},
+            async authorize(credentials): Promise<any> {
+              return await signInWithEmailAndPassword(auth, (credentials as any).email || '', (credentials as any).password || '')
+                .then(userCredential => {
+                  if (userCredential.user) {
+                    return userCredential.user;
+                  }
+                  return null;
+                })
+                .catch(error => (console.log(error)))
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(error);
+        });
             }
-        })
+          })
     ],
     pages: {
         signIn: '/signin'
