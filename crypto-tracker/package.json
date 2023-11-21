@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "firebase": "^10.6.0",
+    "firebase-admin": "^11.11.0",
+    "firebase-functions": "^4.5.0",
     "next": "latest",
     "next-auth": "^4.23.2",
     "react": "latest",
