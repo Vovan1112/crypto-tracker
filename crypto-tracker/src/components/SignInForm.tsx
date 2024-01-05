@@ -50,6 +50,12 @@ const SignInForm = () => {
                         </div>
                     </div>
                 </div>
+                <p className="mt-10 text-center text-sm text-black">
+            Not a member?{' '}
+            <button onClick={() => router.push('signup')} className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300">
+              Sign Up
+            </button>
+          </p>
             </div>
         </div>
     </form>
