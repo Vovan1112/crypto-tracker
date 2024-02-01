@@ -1,7 +1,13 @@
+'use client';
 import Link from 'next/link';
 import { BurgerMenu } from './BurgerMenu';
+import { signOut, useSession } from 'next-auth/react';
 
 const Header = () => {
+
+  const session = useSession();
+
+
   return (
     <header className="bg-custom-main py-4">
       <div className="container mx-auto flex justify-around items-center">
@@ -16,6 +22,9 @@ const Header = () => {
           <Link href="/contact" className="transition-colors hover:text-indigo-500 duration-500">
             Contact
           </Link>
+          {session?.data &&  <Link href="/favorites" className="transition-colors hover:text-indigo-500 duration-500">
+            Favorites
+          </Link>}
         </nav>
 
         <div className="md:hidden">
@@ -23,9 +32,11 @@ const Header = () => {
         </div>
 
         <div className="hidden md:block">
-          <button className="text-white transition-colors hover:bg-indigo-500 duration-500 text-lg px-4 py-2 rounded-full border-solid border border-gray-400">
+          {session?.data ?  <Link href="#" className="transition-colors hover:text-indigo-500 duration-500 text-white" onClick={() => signOut({callbackUrl: '/'})} >
+            Sign Out
+          </Link> : <Link href="/api/auth/signin" className="transition-colors hover:text-indigo-500 duration-500 text-white" >
             Sign In
-          </button>
+          </Link>}
         </div>
       </div>
     </header>

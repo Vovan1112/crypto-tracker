@@ -1,13 +1,19 @@
 'use client'
 import { useRouter } from "next/navigation"
+<<<<<<< HEAD
 import type { FormEventHandler } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/app/firebase";
 import { signIn } from "next-auth/react";
+=======
+import {signIn} from 'next-auth/react'
+import type { FormEventHandler } from "react";
+>>>>>>> 7e76d3744be697892d53a9d6c2c876edaff4a84d
 
 const SignInForm = () => {
 
     const router = useRouter();
+<<<<<<< HEAD
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
     
@@ -15,6 +21,13 @@ const SignInForm = () => {
     
         const email = formData.get('email') as string;
         const password = formData.get('password') as string;
+=======
+
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+>>>>>>> 7e76d3744be697892d53a9d6c2c876edaff4a84d
 
         const res = await signIn('credentials', {
             email: formData.get('email'),
@@ -27,6 +40,7 @@ const SignInForm = () => {
         }else{
             console.log(res?.error)
         }
+<<<<<<< HEAD
     
         try {
           await signInWithEmailAndPassword(auth, email, password);
@@ -35,6 +49,9 @@ const SignInForm = () => {
           console.error('Error during sign in:', error);
         }
       };
+=======
+    }
+>>>>>>> 7e76d3744be697892d53a9d6c2c876edaff4a84d
 
     return (
         <form className=" py-6 flex flex-col sm:py-12" onSubmit={handleSubmit}>
@@ -61,12 +78,15 @@ const SignInForm = () => {
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <p className="mt-10 text-center text-sm text-black">
             Not a member?{' '}
             <button onClick={() => router.push('signup')} className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300">
               Sign Up
             </button>
           </p>
+=======
+>>>>>>> 7e76d3744be697892d53a9d6c2c876edaff4a84d
             </div>
         </div>
     </form>
