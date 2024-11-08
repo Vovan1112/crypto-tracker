@@ -30,3 +30,8 @@ export interface ICurrency  {
 export interface ICurrencyData {
     currencies: ICurrency[]
 }
+
+export interface SectionWithPopUpProps {
+    item: ICurrency;
+    onClose: () => void;
+  }
